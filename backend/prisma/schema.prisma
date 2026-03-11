@@ -1,0 +1,53 @@
+// Configuración de Cotización (Clientes) - Modelo de datos
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Plant {
+  id        String   @id @default(uuid())
+  name      String
+  code      String?  @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  margins   PlantOperationMargin[]
+}
+
+model Operation {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  margins     PlantOperationMargin[]
+}
+
+enum VolumeRangeKey {
+  VOLUME_300KG
+  VOLUME_500KG
+  VOLUME_1T
+  VOLUME_3T
+  VOLUME_5T
+  VOLUME_10T
+  VOLUME_20T
+  VOLUME_30T
+}
+
+model PlantOperationMargin {
+  id            String         @id @default(uuid())
+  plantId       String
+  operationId   String
+  volumeRange   VolumeRangeKey
+  marginPercent Decimal        @db.Decimal(5, 2)
+  plant         Plant          @relation(fields: [plantId], references: [id], onDelete: Cascade)
+  operation     Operation      @relation(fields: [operationId], references: [id], onDelete: Cascade)
+
+  @@unique([plantId, operationId, volumeRange])
+  @@index([plantId])
+  @@index([operationId])
+}

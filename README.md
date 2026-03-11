@@ -11,8 +11,11 @@ Módulo para ajustar parámetros de cotización por planta (sede): márgenes y r
 
 ```
 quotation-config/
-├── backend/     # API GraphQL + Prisma
-├── frontend/    # Aplicación React
+├── backend/           # API GraphQL + Prisma
+│   └── prisma/
+├── frontend/          # Aplicación React
+├── docs/
+├── docker-compose.yml # PostgreSQL local
 └── README.md
 ```
 
@@ -20,7 +23,7 @@ quotation-config/
 
 - Node.js >= 20
 - npm >= 9
-- Base de datos (PostgreSQL o MySQL) para el backend
+- Base de datos PostgreSQL (opcinal: docker-compose)
 
 ## Instalación
 
@@ -31,6 +34,14 @@ cd backend && npm install
 # Frontend
 cd frontend && npm install
 ```
+
+## Base de datos
+
+**Con Docker:** `docker-compose up -d`. Credenciales en `docker-compose.yml`; `backend/.env.example` ya coincide. Luego `cd backend && npm run prisma:migrate`.
+
+**Sin Docker:** Definir `DATABASE_URL` en `backend/.env` y ejecutar `npm run prisma:migrate` en `backend/`.
+
+Modelo de datos: [docs/ENTITY_RELATIONSHIPS.md](docs/ENTITY_RELATIONSHIPS.md). Docker: [docs/DOCKER.md](docs/DOCKER.md).
 
 ## Ejecución
 
