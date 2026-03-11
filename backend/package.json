@@ -17,7 +17,11 @@
   "keywords": ["graphql", "prisma", "quotation"],
   "license": "ISC",
   "dependencies": {
-    "@prisma/client": "^5.22.0"
+    "@apollo/server": "^4.10.0",
+    "@graphql-tools/schema": "^10.0.0",
+    "@prisma/client": "^5.22.0",
+    "dotenv": "^16.4.5",
+    "graphql": "^16.8.1"
   },
   "devDependencies": {
     "prisma": "^5.22.0",

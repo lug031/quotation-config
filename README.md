@@ -47,10 +47,9 @@ Modelo de datos: [docs/ENTITY_RELATIONSHIPS.md](docs/ENTITY_RELATIONSHIPS.md). D
 
 ```bash
 # Backend
-cd backend && npm run dev
-
+cd backend && npm run dev   # API GraphQL en http://localhost:4000
 # Frontend (en otra terminal)
-cd frontend && npm run dev
+cd frontend && npm run dev  # otra terminal
 ```
 
 ## Convención de ramas
