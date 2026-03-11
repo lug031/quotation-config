@@ -1,0 +1,20 @@
+{
+  "name": "quotation-config-backend",
+  "version": "1.0.0",
+  "description": "Backend GraphQL + Prisma para configuración de cotización por planta",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "keywords": ["graphql", "prisma", "quotation"],
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.3.0",
+    "tsx": "^4.7.0"
+  }
+}
