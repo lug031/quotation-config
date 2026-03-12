@@ -1,0 +1,4 @@
+#!/bin/sh
+hook_dir="$(cd "$(dirname "$0")" && pwd)"
+project_dir="$(dirname "$hook_dir")"
+npx --no-install commitlint --edit "$1" --config "$project_dir/commitlint.config.js"
