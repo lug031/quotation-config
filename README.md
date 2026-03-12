@@ -20,7 +20,7 @@ quotation-config/
 ```
 
 - **Backend:** [backend/README.md](backend/README.md) — API GraphQL, Prisma, scripts y variables de entorno.
-- **Frontend:** [frontend/README.md](frontend/README.md) — aplicación React; detalle del módulo Costos indirectos en [frontend/src/features/indirect-costs/README.md](frontend/src/features/indirect-costs/README.md).
+- **Frontend:** [frontend/README.md](frontend/README.md) — aplicación React.
 
 ## Prerrequisitos
 
