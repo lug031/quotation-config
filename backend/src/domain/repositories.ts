@@ -36,6 +36,10 @@ export interface IPlantRepository {
 
 export interface IOperationRepository {
   findAll(): Promise<Operation[]>;
+  findMany(skip: number, take: number): Promise<Operation[]>;
+  count(): Promise<number>;
+  findManyWithMarginsByPlant(plantId: string, skip: number, take: number): Promise<Operation[]>;
+  countWithMarginsByPlant(plantId: string): Promise<number>;
   findById(id: string): Promise<Operation | null>;
   create(data: { name: string; description?: string | null }): Promise<Operation>;
   update(id: string, data: { name?: string; description?: string | null }): Promise<Operation>;

@@ -5,25 +5,29 @@ Módulo para ajustar parámetros de cotización por planta (sede): márgenes y r
 ## Stack
 
 - **Backend:** Node.js 20, GraphQL, Prisma
-- **Frontend:** React 18, Apollo Client, TailwindCSS o Material UI
+- **Frontend:** React 18, Apollo Client, TailwindCSS
 
 ## Estructura del repositorio
 
 ```
 quotation-config/
-├── backend/           # API GraphQL + Prisma
+├── backend/           # API GraphQL + Prisma → backend/README.md
 │   └── prisma/
 ├── frontend/          # Aplicación React
+│   └── src/features/indirect-costs/   # Módulo Costos indirectos
 ├── docs/
 ├── docker-compose.yml # PostgreSQL local
 └── README.md
 ```
 
+- **Backend:** [backend/README.md](backend/README.md) — API GraphQL, Prisma, scripts y variables de entorno.
+- **Frontend — Costos indirectos:** [frontend/src/features/indirect-costs/README.md](frontend/src/features/indirect-costs/README.md).
+
 ## Prerrequisitos
 
 - Node.js >= 20
 - npm >= 9
-- Base de datos PostgreSQL (opcinal: docker-compose)
+- PostgreSQL (Docker o local)
 
 ## Instalación
 
@@ -37,21 +41,21 @@ cd frontend && npm install
 
 ## Base de datos
 
-**Con Docker:** `docker-compose up -d`. Credenciales en `docker-compose.yml`; `backend/.env.example` ya coincide. Luego `cd backend && npm run prisma:migrate`.
+`docker-compose up -d` (credenciales en `docker-compose.yml`; `backend/.env.example` coincide). Luego en `backend/`: `npm run prisma:migrate`. Sin Docker: configurar `DATABASE_URL` en `backend/.env` y ejecutar las migraciones.
 
-**Sin Docker:** Definir `DATABASE_URL` en `backend/.env` y ejecutar `npm run prisma:migrate` en `backend/`.
-
-Modelo de datos: [docs/ENTITY_RELATIONSHIPS.md](docs/ENTITY_RELATIONSHIPS.md). Docker: [docs/DOCKER.md](docs/DOCKER.md).
+[docs/ENTITY_RELATIONSHIPS.md](docs/ENTITY_RELATIONSHIPS.md) · [docs/DOCKER.md](docs/DOCKER.md)
 
 ## Ejecución
 
 ```bash
-# Backend
-cd backend && npm run dev   # API GraphQL en http://localhost:4000
-# Frontend (en otra terminal)
-cd frontend && npm run dev  # otra terminal
+cd backend && npm run dev
+cd frontend && npm run dev   # otra terminal
 ```
+
+Backend: `http://localhost:4000`.
 
 ## Convención de ramas
 
 - Formato: `feature/<nombre>` (ej. `feature/cotizacion-clientes`).
+
+Convención de ramas: [GIT_WORKFLOW.md](GIT_WORKFLOW.md).

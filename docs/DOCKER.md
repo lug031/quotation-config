@@ -10,4 +10,4 @@ Servicio definido en `docker-compose.yml`: PostgreSQL 16 Alpine, puerto 5432.
 
 **Comandos:** `docker-compose up -d` | `docker-compose down` | `docker-compose down -v` (borra datos).
 
-**Puerto 5432 ocupado:** Cambiar en `docker-compose.yml` el mapeo (ej. `5433:5432`) y en `backend/.env` usar el puerto elegido en `DATABASE_URL`.
+**Puerto 5432 ocupado:** Cambiar el mapeo en `docker-compose.yml` y el puerto en `DATABASE_URL` (`backend/.env`).

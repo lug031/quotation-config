@@ -1,5 +1,7 @@
 export const LOW_MARGIN_ALERT_THRESHOLD_PERCENT = 5;
 
+export const DEFAULT_QUERY_LIMIT = 50;
+
 export const VOLUME_RANGE_KEYS = [
   "VOLUME_300KG",
   "VOLUME_500KG",

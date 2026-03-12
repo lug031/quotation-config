@@ -1,11 +1,12 @@
-import { hasLowMarginAlert } from "../domain/constants";
-import * as useCases from "../domain/useCases";
-import { PlantRepository } from "../infra/prisma/PlantRepository";
-import { OperationRepository } from "../infra/prisma/OperationRepository";
-import { PlantOperationMarginRepository } from "../infra/prisma/PlantOperationMarginRepository";
-import type { MarginInput, PlantOperationMarginRecord } from "../domain/repositories";
+import { DEFAULT_QUERY_LIMIT, hasLowMarginAlert } from "../domain/constants";
 import { ValidationError } from "../domain/errors";
+import type { MarginInput, PlantOperationMarginRecord } from "../domain/repositories";
+import * as useCases from "../domain/useCases";
+import { PlantOperationMarginRepository } from "../infra/prisma/PlantOperationMarginRepository";
+import { OperationRepository } from "../infra/prisma/OperationRepository";
+import { PlantRepository } from "../infra/prisma/PlantRepository";
 import { GraphQLError } from "graphql";
+import { logger } from "../logger";
 
 function marginToGraphQL(m: PlantOperationMarginRecord) {
   return {
@@ -25,8 +26,38 @@ export function buildResolvers() {
       plant: (_: unknown, { id }: { id: string }) => useCases.getPlant(PlantRepository, id),
       operations: () => useCases.getOperations(OperationRepository),
       operation: (_: unknown, { id }: { id: string }) => useCases.getOperation(OperationRepository, id),
-      operationsWithMarginsByPlant: (_: unknown, { plantId }: { plantId: string }) =>
-        useCases.getOperationsWithMarginsByPlant(OperationRepository, PlantOperationMarginRepository, plantId),
+      operationsWithMarginsByPlant: (
+        _: unknown,
+        {
+          plantId,
+          limit,
+          offset,
+          onlyWithMargins,
+        }: {
+          plantId: string;
+          limit?: number | null;
+          offset?: number | null;
+          onlyWithMargins?: boolean | null;
+        }
+      ) => {
+        const safeLimit = Math.min(100, Math.max(1, Math.floor(Number(limit) || DEFAULT_QUERY_LIMIT)));
+        const safeOffset = Math.max(0, Math.floor(Number(offset) || 0));
+        const filterOnlyWithMargins = Boolean(onlyWithMargins);
+        logger.info("operationsWithMarginsByPlant", {
+          plantId,
+          limit: safeLimit,
+          offset: safeOffset,
+          onlyWithMargins: filterOnlyWithMargins,
+        });
+        return useCases.getOperationsWithMarginsByPlant(
+          OperationRepository,
+          PlantOperationMarginRepository,
+          plantId,
+          safeLimit,
+          safeOffset,
+          filterOnlyWithMargins
+        );
+      },
     },
     OperationWithMargins: {
       operation: (parent: { operation: { id: string; name: string; description: string | null } }) =>
@@ -50,8 +81,9 @@ export function buildResolvers() {
           operationId,
           margins,
         }: { plantId: string; operationId: string; margins: MarginInput[] }
-      ) =>
-        useCases
+      ) => {
+        logger.info("saveOperationMargins", { plantId, operationId, marginsCount: margins.length });
+        return useCases
           .saveOperationMargins(PlantOperationMarginRepository, plantId, operationId, margins)
           .then((list) => list.map(marginToGraphQL))
           .catch((err: unknown) => {
@@ -61,7 +93,8 @@ export function buildResolvers() {
               });
             }
             throw err;
-          }),
+          });
+      },
     },
   };
 }

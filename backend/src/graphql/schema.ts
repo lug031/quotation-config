@@ -36,12 +36,17 @@ export const typeDefs = `#graphql
     margins: [PlantOperationMargin!]!
   }
 
+  type OperationsWithMarginsByPlantResult {
+    items: [OperationWithMargins!]!
+    totalCount: Int!
+  }
+
   type Query {
     plants: [Plant!]!
     plant(id: ID!): Plant
     operations: [Operation!]!
     operation(id: ID!): Operation
-    operationsWithMarginsByPlant(plantId: ID!): [OperationWithMargins!]!
+    operationsWithMarginsByPlant(plantId: ID!, limit: Int, offset: Int, onlyWithMargins: Boolean): OperationsWithMarginsByPlantResult!
   }
 
   input CreateOperationInput {

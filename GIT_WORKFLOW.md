@@ -2,12 +2,9 @@
 
 ## Convención de ramas
 
-- **Formato:** `tipo/descripcion-corta`
-- **Ejemplos:** `feature/cotizacion-clientes`, `feature/margins`
+- **Formato:** `tipo/descripcion-corta` (p. ej. `feature/cotizacion-clientes`)
 - **Rama principal:** `main`
 
-## Convención de mensajes de commit
+## Commits
 
-- Estilo **Conventional Commits**: `tipo(alcance): descripción breve`
-- Tipos usados: `chore`, `feat`, `docs`
-- Ejemplo: `chore: add project base and README`
+Conventional Commits: `tipo(alcance): descripción`. Tipos: `chore`, `feat`, `docs`.

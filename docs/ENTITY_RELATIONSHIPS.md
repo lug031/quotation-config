@@ -2,7 +2,7 @@
 
 **Plant:** Planta/sede. Campos: `id`, `name`, `code?`, timestamps. 1:N con `PlantOperationMargin`.
 
-**Operation:** Operación (ej. empaque, transporte). Campos: `id`, `name`, `description?`, timestamps. 1:N con `PlantOperationMargin`.
+**Operation:** Operación. Campos: `id`, `name`, `description?`, timestamps. 1:N con `PlantOperationMargin`.
 
 **VolumeRangeKey:** Enum con 8 rangos: 300 kg, 500 kg, 1T, 3T, 5T, 10T, 20T, 30T.
 

@@ -41,13 +41,26 @@ export async function getOperation(
   return operationRepo.findById(id);
 }
 
+export interface OperationsWithMarginsByPlantResult {
+  items: OperationWithMargins[];
+  totalCount: number;
+}
+
 export async function getOperationsWithMarginsByPlant(
   operationRepo: IOperationRepository,
   marginRepo: IPlantOperationMarginRepository,
-  plantId: string
-): Promise<OperationWithMargins[]> {
-  const [operations, marginsForPlant] = await Promise.all([
-    operationRepo.findAll(),
+  plantId: string,
+  limit: number,
+  offset: number,
+  onlyWithMargins: boolean
+): Promise<OperationsWithMarginsByPlantResult> {
+  const [operations, totalCount, marginsForPlant] = await Promise.all([
+    onlyWithMargins
+      ? operationRepo.findManyWithMarginsByPlant(plantId, offset, limit)
+      : operationRepo.findMany(offset, limit),
+    onlyWithMargins
+      ? operationRepo.countWithMarginsByPlant(plantId)
+      : operationRepo.count(),
     marginRepo.findManyByPlantId(plantId),
   ]);
   const marginsByOperationId = new Map<string, PlantOperationMarginRecord[]>();
@@ -56,10 +69,11 @@ export async function getOperationsWithMarginsByPlant(
     list.push(m);
     marginsByOperationId.set(m.operationId, list);
   }
-  return operations.map((operation) => ({
+  const items = operations.map((operation) => ({
     operation,
     margins: marginsByOperationId.get(operation.id) ?? [],
   }));
+  return { items, totalCount };
 }
 
 export async function createOperation(
@@ -88,7 +102,9 @@ export async function saveOperationMargins(
       throw new ValidationError("El margen debe estar entre 0 y 100.");
     }
     if (m.marginPercent < LOW_MARGIN_ALERT_THRESHOLD_PERCENT) {
-      throw new ValidationError("El margen no puede ser menor a 5%.");
+      throw new ValidationError(
+        `El margen no puede ser menor a ${LOW_MARGIN_ALERT_THRESHOLD_PERCENT}%.`
+      );
     }
   }
   return marginRepo.upsertMany(plantId, operationId, margins);
