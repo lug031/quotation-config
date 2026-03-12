@@ -5,22 +5,28 @@ Módulo para ajustar parámetros de cotización por planta (sede): márgenes y r
 ## Stack
 
 - **Backend:** Node.js 20, GraphQL, Prisma
-- **Frontend:** React 18, Apollo Client, TailwindCSS o Material UI
+- **Frontend:** React 18, Apollo Client, TailwindCSS
 
 ## Estructura del repositorio
 
 ```
 quotation-config/
-├── backend/     # API GraphQL + Prisma
-├── frontend/    # Aplicación React
+├── backend/           # API GraphQL + Prisma → backend/README.md
+├── frontend/          # Aplicación React (Vite) → frontend/README.md
+├── docs/              # ENTITY_RELATIONSHIPS.md, DOCKER.md
+├── docker-compose.yml # PostgreSQL local
+├── GIT_WORKFLOW.md    # Convención de ramas y flujo Git
 └── README.md
 ```
+
+- **Backend:** [backend/README.md](backend/README.md) — API GraphQL, Prisma, scripts y variables de entorno.
+- **Frontend:** [frontend/README.md](frontend/README.md) — aplicación React; detalle del módulo Costos indirectos en [frontend/src/features/indirect-costs/README.md](frontend/src/features/indirect-costs/README.md).
 
 ## Prerrequisitos
 
 - Node.js >= 20
 - npm >= 9
-- Base de datos (PostgreSQL o MySQL) para el backend
+- PostgreSQL (Docker o local)
 
 ## Instalación
 
@@ -32,16 +38,24 @@ cd backend && npm install
 cd frontend && npm install
 ```
 
+## Base de datos
+
+`docker-compose up -d` (credenciales en `docker-compose.yml`; `backend/.env.example` coincide). Luego en `backend/`: `npm run prisma:migrate`. Sin Docker: configurar `DATABASE_URL` en `backend/.env` y ejecutar las migraciones.
+
+[docs/ENTITY_RELATIONSHIPS.md](docs/ENTITY_RELATIONSHIPS.md) · [docs/DOCKER.md](docs/DOCKER.md)
+
 ## Ejecución
 
 ```bash
-# Backend
 cd backend && npm run dev
-
-# Frontend (en otra terminal)
-cd frontend && npm run dev
+cd frontend && npm run dev   # otra terminal
 ```
+
+- **Backend:** `http://localhost:4000`
+- **Frontend:** `http://localhost:5173`
 
 ## Convención de ramas
 
 - Formato: `feature/<nombre>` (ej. `feature/cotizacion-clientes`).
+
+Convención de ramas: [GIT_WORKFLOW.md](GIT_WORKFLOW.md).
