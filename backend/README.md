@@ -24,7 +24,7 @@ backend/
 │   ├── domain/
 │   │   ├── useCases.ts     # Casos de uso
 │   │   ├── errors.ts       # ValidationError y otros
-│   │   ├── constants.ts    # Umbral alerta margen (5 %), VOLUME_RANGE_KEYS
+│   │   ├── constants.ts    # Umbral alerta margen (5 %), DEFAULT_QUERY_LIMIT (50), VOLUME_RANGE_KEYS
 │   │   └── repositories.ts # Interfaces de repositorios
 │   └── infra/
 │       └── prisma/         # Implementación Prisma de los repositorios

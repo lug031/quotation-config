@@ -12,16 +12,15 @@ Módulo para ajustar parámetros de cotización por planta (sede): márgenes y r
 ```
 quotation-config/
 ├── backend/           # API GraphQL + Prisma → backend/README.md
-│   └── prisma/
-├── frontend/          # Aplicación React
-│   └── src/features/indirect-costs/   # Módulo Costos indirectos
-├── docs/
+├── frontend/          # Aplicación React (Vite) → frontend/README.md
+├── docs/              # ENTITY_RELATIONSHIPS.md, DOCKER.md
 ├── docker-compose.yml # PostgreSQL local
+├── GIT_WORKFLOW.md    # Convención de ramas y flujo Git
 └── README.md
 ```
 
 - **Backend:** [backend/README.md](backend/README.md) — API GraphQL, Prisma, scripts y variables de entorno.
-- **Frontend — Costos indirectos:** [frontend/src/features/indirect-costs/README.md](frontend/src/features/indirect-costs/README.md).
+- **Frontend:** [frontend/README.md](frontend/README.md) — aplicación React.
 
 ## Prerrequisitos
 
@@ -52,7 +51,8 @@ cd backend && npm run dev
 cd frontend && npm run dev   # otra terminal
 ```
 
-Backend: `http://localhost:4000`.
+- **Backend:** `http://localhost:4000`
+- **Frontend:** `http://localhost:5173`
 
 ## Convención de ramas
 
