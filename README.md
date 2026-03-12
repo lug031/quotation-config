@@ -11,10 +11,10 @@ Módulo para ajustar parámetros de cotización por planta (sede): márgenes y r
 
 ```
 quotation-config/
-├── backend/           # API GraphQL + Prisma → backend/README.md
-├── frontend/          # Aplicación React (Vite) → frontend/README.md
+├── backend/           # API GraphQL + Prisma (Dockerfile) → backend/README.md
+├── frontend/          # Aplicación React + Vite (Dockerfile) → frontend/README.md
 ├── docs/              # ENTITY_RELATIONSHIPS.md, DOCKER.md, seed-data.graphql
-├── docker-compose.yml # PostgreSQL local
+├── docker-compose.yml # PostgreSQL + backend + frontend
 ├── GIT_WORKFLOW.md    # Convención de ramas y flujo Git
 └── README.md
 ```
@@ -40,13 +40,13 @@ cd frontend && npm install
 
 ## Base de datos
 
-`docker-compose up -d` (credenciales en `docker-compose.yml`; `backend/.env.example` coincide). Luego en `backend/`: `npm run prisma:migrate`. Sin Docker: configurar `DATABASE_URL` en `backend/.env` y ejecutar las migraciones.
+Sin Docker: configurar `DATABASE_URL` en `backend/.env` y ejecutar `npm run prisma:migrate` en `backend/`. Con Docker: ver [Ejecución con Docker](#ejecución-con-docker).
 
-**Datos de prueba:** Para cargar plantas y operaciones de prueba, ejecutar las mutations del archivo [docs/seed-data.graphql](docs/seed-data.graphql) en el GraphQL Playground (`http://localhost:4000`).
+**Datos de prueba:** Para cargar plantas y operaciones de ejemplo, ejecutar las mutations de [docs/seed-data.graphql](docs/seed-data.graphql) en el GraphQL Playground (`http://localhost:4000`).
 
 [docs/ENTITY_RELATIONSHIPS.md](docs/ENTITY_RELATIONSHIPS.md) · [docs/DOCKER.md](docs/DOCKER.md)
 
-## Ejecución
+## Ejecución (local)
 
 ```bash
 cd backend && npm run dev
@@ -56,6 +56,27 @@ cd frontend && npm run dev   # otra terminal
 - **Backend:** `http://localhost:4000`
 - **Frontend:** `http://localhost:5173`
 
-## Entregables
+## Ejecución con Docker
 
-Entregables quotation-config: [GIT_WORKFLOW.md](GIT_WORKFLOW.md).
+Desde la raíz del repo se pueden levantar PostgreSQL, backend y frontend con Docker Compose:
+
+```bash
+docker compose up -d
+```
+
+Tras el primer build, para reconstruir tras cambios:
+
+```bash
+docker compose up -d --build
+```
+
+| Servicio   | URL                    |
+|-----------|------------------------|
+| Backend   | http://localhost:4000  |
+| Frontend  | http://localhost:8080  |
+
+Las migraciones se aplican al arrancar el backend. Detalle de servicios, puertos y variables: [docs/DOCKER.md](docs/DOCKER.md).
+
+## Convención de ramas
+
+Formato: `feature/<nombre>` (ej. `feature/cotizacion-clientes`). Detalle: [GIT_WORKFLOW.md](GIT_WORKFLOW.md).
