@@ -13,7 +13,7 @@ Módulo para ajustar parámetros de cotización por planta (sede): márgenes y r
 quotation-config/
 ├── backend/           # API GraphQL + Prisma → backend/README.md
 ├── frontend/          # Aplicación React (Vite) → frontend/README.md
-├── docs/              # ENTITY_RELATIONSHIPS.md, DOCKER.md
+├── docs/              # ENTITY_RELATIONSHIPS.md, DOCKER.md, seed-data.graphql
 ├── docker-compose.yml # PostgreSQL local
 ├── GIT_WORKFLOW.md    # Convención de ramas y flujo Git
 └── README.md
@@ -41,6 +41,8 @@ cd frontend && npm install
 ## Base de datos
 
 `docker-compose up -d` (credenciales en `docker-compose.yml`; `backend/.env.example` coincide). Luego en `backend/`: `npm run prisma:migrate`. Sin Docker: configurar `DATABASE_URL` en `backend/.env` y ejecutar las migraciones.
+
+**Datos de prueba:** Para cargar plantas y operaciones de prueba, ejecutar las mutations del archivo [docs/seed-data.graphql](docs/seed-data.graphql) en el GraphQL Playground (`http://localhost:4000`).
 
 [docs/ENTITY_RELATIONSHIPS.md](docs/ENTITY_RELATIONSHIPS.md) · [docs/DOCKER.md](docs/DOCKER.md)
 

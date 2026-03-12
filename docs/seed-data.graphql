@@ -1,0 +1,142 @@
+# ============================================================
+# Datos de prueba
+# Ejecutar en GraphQL Playground (http://localhost:4000)
+# ============================================================
+
+# ---------- 1. CREAR PLANTAS ----------
+
+mutation CreatePlant1 {
+  createPlant(input: { name: "Planta Lima", code: "PE-LIM" }) {
+    id
+    name
+    code
+  }
+}
+
+mutation CreatePlant2 {
+  createPlant(input: { name: "Planta Monterrey", code: "MX-MTY" }) {
+    id
+    name
+    code
+  }
+}
+
+mutation CreatePlant3 {
+  createPlant(input: { name: "Planta Bogotá", code: "CO-BOG" }) {
+    id
+    name
+    code
+  }
+}
+
+# ---------- 2. CREAR OPERACIONES ----------
+
+mutation CreateOperation1 {
+  createOperation(input: {
+    name: "Empaque"
+    description: "Empaque primario y secundario"
+  }) {
+    id
+    name
+    description
+  }
+}
+
+mutation CreateOperation2 {
+  createOperation(input: {
+    name: "Transporte"
+    description: "Logística terrestre y distribución"
+  }) {
+    id
+    name
+    description
+  }
+}
+
+mutation CreateOperation3 {
+  createOperation(input: {
+    name: "Almacenaje"
+    description: "Bodegaje y custodia de inventario"
+  }) {
+    id
+    name
+    description
+  }
+}
+
+mutation CreateOperation4 {
+  createOperation(input: {
+    name: "Etiquetado"
+    description: "Etiquetado manual o automático"
+  }) {
+    id
+    name
+    description
+  }
+}
+
+mutation CreateOperation5 {
+  createOperation(input: {
+    name: "Paletizado"
+    description: "Armado y estabilización de pallets"
+  }) {
+    id
+    name
+    description
+  }
+}
+
+mutation CreateOperation6 {
+  createOperation(input: {
+    name: "Inspección de calidad"
+    description: "Control de calidad pre-embarque"
+  }) {
+    id
+    name
+    description
+  }
+}
+
+mutation CreateOperation7 {
+  createOperation(input: {
+    name: "Seguro"
+    description: "Cobertura de mercadería en tránsito"
+  }) {
+    id
+    name
+    description
+  }
+}
+
+mutation CreateOperation8 {
+  createOperation(input: {
+    name: "Gestión documental"
+    description: "Documentación comercial y aduanera"
+  }) {
+    id
+    name
+    description
+  }
+}
+
+mutation CreateOperation9 {
+  createOperation(input: {
+    name: "Tratamiento aduanero"
+    description: "Despacho y trámites aduaneros"
+  }) {
+    id
+    name
+    description
+  }
+}
+
+mutation CreateOperation10 {
+  createOperation(input: {
+    name: "Otros"
+    description: "Otros costos indirectos"
+  }) {
+    id
+    name
+    description
+  }
+}
