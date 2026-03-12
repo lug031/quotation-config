@@ -29,6 +29,8 @@ backend/
 │   └── infra/
 │       └── prisma/         # Implementación Prisma de los repositorios
 ├── .env.example
+├── Dockerfile              # Imagen para Docker Compose
+├── .dockerignore
 └── README.md
 ```
 
@@ -92,3 +94,11 @@ Rangos de volumen: `VOLUME_300KG`, `VOLUME_500KG`, `VOLUME_1T`, `VOLUME_3T`, `VO
 - **PlantOperationMargin**: (plantId, operationId, volumeRange) único; marginPercent Decimal(5,2); cascade on delete.
 
 Esquema: `prisma/schema.prisma`. Entidades: [docs/ENTITY_RELATIONSHIPS.md](../docs/ENTITY_RELATIONSHIPS.md).
+
+## Docker
+
+```bash
+docker compose up -d
+```
+
+API: `http://localhost:4000`.
