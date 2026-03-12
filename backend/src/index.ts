@@ -32,7 +32,9 @@ const server = new ApolloServer({
 const port = Number(process.env.PORT) || 4000;
 
 async function main() {
-  await startStandaloneServer(server, { listen: { port } });
+  await startStandaloneServer(server, {
+    listen: { port, host: "0.0.0.0" },
+  });
   logger.info("Server started", { port });
 }
 
