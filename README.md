@@ -56,8 +56,6 @@ cd frontend && npm run dev   # otra terminal
 - **Backend:** `http://localhost:4000`
 - **Frontend:** `http://localhost:5173`
 
-## Convención de ramas
+## Entregables
 
-- Formato: `feature/<nombre>` (ej. `feature/cotizacion-clientes`).
-
-Convención de ramas: [GIT_WORKFLOW.md](GIT_WORKFLOW.md).
+Entregables quotation-config: [GIT_WORKFLOW.md](GIT_WORKFLOW.md).
