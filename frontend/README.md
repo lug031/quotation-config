@@ -27,6 +27,9 @@ frontend/
 │   └── features/
 │       └── indirect-costs/   # Módulo Costos indirectos
 ├── .env.example
+├── Dockerfile              # Build Vite + nginx para Docker Compose
+├── nginx.conf              # Config nginx para SPA
+├── .dockerignore
 ├── package.json
 └── README.md
 ```
@@ -63,3 +66,11 @@ npm run dev
 ```
 
 El backend GraphQL debe estar corriendo (por defecto `http://localhost:4000`).
+
+## Docker
+
+```bash
+docker compose up -d
+```
+
+Frontend: `http://localhost:8080`.

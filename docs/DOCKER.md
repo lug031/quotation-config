@@ -1,13 +1,38 @@
-# PostgreSQL con Docker
+# Docker
 
-Servicio definido en `docker-compose.yml`: PostgreSQL 16 Alpine, puerto 5432.
+## Servicios
 
-| Parámetro | Valor |
-|-----------|--------|
-| Usuario / contraseña / BD | `user` / `password` / `quotation_config` |
-| Conexión | `postgresql://user:password@localhost:5432/quotation_config` |
-| Volumen | `quotation_config_pgdata` |
+| Servicio   | Puerto (host) | Imagen / build      |
+|-----------|---------------|----------------------|
+| `postgres` | 5432          | `postgres:16-alpine` |
+| `backend`  | 4000          | `./backend` (Dockerfile) |
+| `frontend` | 8080 → 80     | `./frontend` (Dockerfile) |
 
-**Comandos:** `docker-compose up -d` | `docker-compose down` | `docker-compose down -v` (borra datos).
+## Comandos
 
-**Puerto 5432 ocupado:** Cambiar el mapeo en `docker-compose.yml` y el puerto en `DATABASE_URL` (`backend/.env`).
+```bash
+docker compose up -d
+docker compose up -d --build
+docker compose logs -f
+docker compose down
+docker compose down -v
+```
+
+## Variables
+
+- **PostgreSQL:** `user` / `password` / `quotation_config`. Conexión desde el host: `postgresql://user:password@localhost:5432/quotation_config`.
+- **Backend:** usa `DATABASE_URL` apuntando a `postgres:5432` en la red de Docker.
+- **Frontend:** la URL del API se define con el build-arg `VITE_GRAPHQL_URL` (por defecto `http://localhost:4000`).
+
+## URLs
+
+- API GraphQL: http://localhost:4000  
+- Aplicación web: http://localhost:8080  
+
+## Solo PostgreSQL
+
+```bash
+docker compose up -d postgres
+```
+
+Luego en `backend/.env` usar `DATABASE_URL=postgresql://user:password@localhost:5432/quotation_config`.
