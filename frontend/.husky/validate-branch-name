@@ -1,0 +1,14 @@
+#!/bin/sh
+
+branch_name=$(git symbolic-ref --short HEAD 2>/dev/null)
+
+if [ "$branch_name" = "main" ] || [ "$branch_name" = "master" ] || [ "$branch_name" = "develop" ]; then
+  exit 0
+fi
+
+if ! echo "$branch_name" | grep -qE '^(feature|bugfix|hotfix|release)/.+'; then
+  echo "Invalid branch name: '$branch_name'"
+  echo "Format: (feature|bugfix|hotfix|release)/<description>"
+  echo "Example: feature/cotizacion-clientes or feature/margins"
+  exit 1
+fi

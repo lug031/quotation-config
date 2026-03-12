@@ -16,6 +16,8 @@ A partir de estas ramas se crean otras según el tipo de trabajo:
 
 En algunos proyectos también he trabajado con una rama intermedia como `staging` o `draft-develop`, que sirve para validar cambios antes de que lleguen a producción.
 
+En este proyecto además se configuró **Husky** para reforzar estas convenciones. Antes de permitir un commit se ejecuta un hook `pre-commit` que valida que el nombre de la rama siga el formato esperado (`main`, `develop` o bien `feature/...`, `bugfix/...`, `hotfix/...`, `release/...`). Si la rama no cumple esa convención, el commit se bloquea.
+
 ## Convención de commits
 
 Para los commits normalmente usamos **Conventional Commits**, con el formato:
@@ -37,7 +39,9 @@ El alcance es opcional, pero ayuda cuando el cambio afecta una parte específica
 feat(indirect-costs): agregar paginación
 ```
 
-Esto ayuda a mantener el historial de cambios más claro y facilita generar changelogs automáticamente.
+También se utiliza **Commitlint** para validar automáticamente los mensajes de commit. Esto se ejecuta mediante un hook `commit-msg` de Husky, que verifica que el mensaje siga el formato de Conventional Commits. Si el mensaje no cumple con las reglas definidas, el commit se rechaza y se debe corregir.
+
+Esto asegura que tanto la convención de ramas como la de commits se validen de forma automática antes de que los cambios entren al repositorio.
 
 ## Cómo mantengo mi branch actualizado con main
 
