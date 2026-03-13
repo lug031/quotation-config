@@ -77,6 +77,6 @@ docker compose up -d --build
 
 Las migraciones se aplican al arrancar el backend. Detalle de servicios, puertos y variables: [docs/DOCKER.md](docs/DOCKER.md).
 
-## Convención de ramas
+## Entregables
 
-Formato: `feature/<nombre>` (ej. `feature/cotizacion-clientes`). Detalle: [GIT_WORKFLOW.md](GIT_WORKFLOW.md).
+Detalle: [GIT_WORKFLOW.md](GIT_WORKFLOW.md).
